@@ -1,0 +1,5 @@
+.scannerwork
+.sonar
+.env
+composer.lock
+vendor

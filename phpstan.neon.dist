@@ -1,0 +1,23 @@
+parameters:
+    level: max
+    paths:
+        - src
+    ignoreErrors:
+        -
+            message: '#Unsafe usage of new static\(\)\.#'
+            paths:
+                - src/Domain/ValueObject/Enum.php
+        -
+            message: '#Access to an undefined property Phalcon\\Mvc\\Micro\:\:\$request\.#'
+            paths:
+                - src/Infrastructure/HTTP/Middleware/*.php
+        -
+            message: '#Access to an undefined property Phalcon\\Mvc\\Micro\:\:\$response\.#'
+            paths:
+                - src/Infrastructure/HTTP/Middleware/*.php
+        -
+            message: '#Trying to invoke Phorza\\Domain\\Bus\\Query\\QueryHandler but it might not be a callable\.#'
+            paths:
+                - src/Infrastructure/Bus/Query/InMemoryProophQueryHandler.php
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false

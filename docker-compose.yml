@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+
+  app:
+    image: dancos/phalcon:alpine
+    restart: unless-stopped
+    volumes:
+      - ./:/workspace
+    user: '1000:1000'
+    environment:
+      PHP_XDEBUG_ENABLED: ${XDEBUG_ENABLED:-0}
+      XDEBUG_CONFIG: >
+        remote_enable=1
+        remote_autostart=1
+        remote_port=${XDEBUG_REMOTE_PORT:-9001}
