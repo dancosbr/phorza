@@ -11,8 +11,8 @@ jobs:
 
     name: PHP ${{ matrix.php }} on ${{ matrix.os }}
     env:
-        extensions: psr, phalcon-4.0.6
-        key: extensions-cache-psr-phalcon-4.0.6
+        extensions: psr, phalcon
+        key: extensions-cache-phalcon-4.0.6
         tools: pecl, phpcs, phpstan
     runs-on: ${{ matrix.os }}
     strategy:

@@ -2,6 +2,9 @@
   "name": "dancos/phorza",
   "description": "API core library with CQRS et al",
   "require": {
+    "php": "^7.4",
+    "ext-psr": "*",
+    "ext-phalcon": ">=4.0.6",
     "ramsey/uuid": "~4.0",
     "prooph/common": "^4.0",
     "prooph/service-bus": "^6.0",
