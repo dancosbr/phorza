@@ -10,7 +10,7 @@ jobs:
 
   setup:
 
-    name: PHP ${{ matrix.php }} on ${{ matrix.os }}
+    name: Dependencies of PHP ${{ matrix.php }} on ${{ matrix.os }}
 
     strategy:
         matrix:
@@ -129,7 +129,7 @@ jobs:
 
   phpcs:
 
-    name: Static Analysis
+    name: Code Styling
 
     strategy:
         matrix:
