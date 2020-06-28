@@ -19,7 +19,7 @@ jobs:
 
     env:
         extensions: psr, phalcon
-        key: extensions-cache-v1
+        key: extensions-cache-${{ matrix.os }}-${{ matrix.php }}-v1
         tools: pecl, phpcs, phpstan
 
     runs-on: ${{ matrix.os }}
