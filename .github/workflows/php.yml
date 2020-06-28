@@ -19,7 +19,7 @@ jobs:
 
     env:
         extensions: psr, phalcon
-        key: extensions-cache-${{ matrix.os }}-${{ matrix.php }}-v1
+        key: extensions-cache
         tools: pecl, phpcs, phpstan
 
     runs-on: ${{ matrix.os }}
@@ -35,7 +35,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.extensions }}
-          key: ${{ env.key }}
+          key: ${{ env.key }}-${{ matrix.os }}-${{ matrix.php }}-v1
 
       - name: Cache extensions
         uses: actions/cache@v2
