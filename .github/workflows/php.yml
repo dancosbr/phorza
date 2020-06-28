@@ -7,20 +7,25 @@ on:
     branches: [ master ]
 
 jobs:
+
   build:
 
     name: PHP ${{ matrix.php }} on ${{ matrix.os }}
-    env:
-        extensions: psr, phalcon
-        key: extensions-cache-phalcon-4.0.6
-        tools: pecl, phpcs, phpstan
-    runs-on: ${{ matrix.os }}
+
     strategy:
         matrix:
             os: ['ubuntu-20.04']
             php: ['7.4']
 
+    env:
+        extensions: psr, phalcon
+        key: extensions-cache-v1
+        tools: pecl, phpcs, phpstan
+
+    runs-on: ${{ matrix.os }}
+
     steps:
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -50,8 +55,8 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
 
-      - name: Install dependencies
-        run: composer install --prefer-dist
+      # - name: Install dependencies
+      #   run: composer install --prefer-dist
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
