@@ -10,7 +10,7 @@ jobs:
 
   setup:
 
-    name: Dependencies of PHP ${{ matrix.php }} on ${{ matrix.os }}
+    name: Dependencies
 
     strategy:
         matrix:
