@@ -55,8 +55,8 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
 
-      # - name: Install dependencies
-      #   run: composer install --prefer-dist
+      - name: Install dependencies
+        run: composer install --prefer-dist
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
