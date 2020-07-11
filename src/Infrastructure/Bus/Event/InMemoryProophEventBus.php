@@ -24,10 +24,10 @@ final class InMemoryProophEventBus implements EventBus
         foreach ($events as $event) {
             try {
                 $this->bus->dispatch($event);
-            } catch (\Prooph\ServiceBus\Exception\EventDispatchException $exception) {
+            } catch (\Prooph\ServiceBus\Exception\EventListenerException $exception) {
                 if ($exception->getPrevious() && $exception->getPrevious() instanceof \Exception) {
-                    if (strpos($exception->getPrevious()->getMessage(), 'EventBus was not able to identify a EventHandler for event') === 0) {
-                        throw EventNotRegisteredError::withEvent($event);
+                    if (strpos($exception->getPrevious()->getMessage(), 'At least one event listener caused an exception. Check listener exceptions for details') === 0) {
+                        throw EventHandlerError::withEvent($event, $exception->listenerExceptions());
                     } else {
                         throw $exception->getPrevious();
                     }
