@@ -1,8 +1,9 @@
 {
   "name": "dancos/phorza",
   "description": "API core library with CQRS et al",
+  "license": "BSD-3-Clause",
   "require": {
-    "php": "^7.4|^8.0",
+    "php": ">=7.4 <8.0",
     "ext-psr": "*",
     "ext-phalcon": ">=4.0.6",
     "ramsey/uuid": "~4.0",
