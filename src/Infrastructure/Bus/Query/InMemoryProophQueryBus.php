@@ -37,7 +37,7 @@ final class InMemoryProophQueryBus implements QueryBus
             } elseif ($error) {
                 throw $error;
             } else {
-                throw new \RuntimeException('Unknow response');
+                throw new UnexpectedQueryError('Unknow query response');
             }
         } catch (\Prooph\ServiceBus\Exception\MessageDispatchException $exception) {
             if ($exception->getPrevious()) {

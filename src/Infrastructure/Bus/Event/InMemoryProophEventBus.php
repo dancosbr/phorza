@@ -24,31 +24,18 @@ final class InMemoryProophEventBus implements EventBus
         foreach ($events as $event) {
             try {
                 $this->bus->dispatch($event);
-            } catch (EventNotRegisteredError $exception) {
-                var_dump($exception);
-                die;
+            } catch (\Prooph\ServiceBus\Exception\EventDispatchException $exception) {
+                if ($exception->getPrevious() && $exception->getPrevious() instanceof \Exception) {
+                    if (strpos($exception->getPrevious()->getMessage(), 'EventBus was not able to identify a EventHandler for event') === 0) {
+                        throw EventNotRegisteredError::withEvent($event);
+                    } else {
+                        throw $exception->getPrevious();
+                    }
+                }
+                throw $exception;
             } catch (\Exception $exception) {
-                var_dump($exception);
-                die;
+                throw $exception;
             }
         }
     }
-
-    // public function dispatch(DomainEvent $event): void
-    // {
-    //     try {
-    //         $this->bus->dispatch($event);
-    //     } catch (\Prooph\ServiceBus\Exception\EventDispatchException $exception) {
-    //         if ($exception->getPrevious() && $exception->getPrevious() instanceof \Exception) {
-    //             if (strpos($exception->getPrevious()->getMessage(), 'EventBus was not able to identify a EventHandler for event') === 0) {
-    //                 throw EventNotRegisteredError::withEvent($event);
-    //             } else {
-    //                 throw $exception->getPrevious();
-    //             }
-    //         }
-    //         throw $exception;
-    //     } catch (\Exception $exception) {
-    //         throw $exception;
-    //     }
-    // }
 }

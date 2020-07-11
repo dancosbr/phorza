@@ -26,25 +26,7 @@ class JsonResponseMiddleware implements MiddlewareInterface
 
         $response = $app->getReturnedValue();
         if (is_array($response)) {
-            if (isset($response['code'])) {
-                $data['code'] = $response['code'];
-                unset($response['code']);
-            }
-            if (isset($response['message'])) {
-                $data['message'] = $response['message'];
-                unset($response['message']);
-            }
-            if (isset($response['total'])) {
-                $data['total'] = $response['total'];
-                unset($response['total']);
-            }
-            if (isset($response['data'])) {
-                $data['data'] = $response['data'];
-                unset($response['data']);
-            }
-            if (count($response)) {
-                $data['extras']  = $response;
-            }
+            $data = $this->prepareContent($response, $data);
         }
 
         $app->response->setHeader('Content-Type', 'application/json');
@@ -57,5 +39,30 @@ class JsonResponseMiddleware implements MiddlewareInterface
         $app->response->send();
 
         return true;
+    }
+
+    private function prepareContent(array $response, array $data): array
+    {
+        if (isset($response['code'])) {
+            $data['code'] = $response['code'];
+            unset($response['code']);
+        }
+        if (isset($response['message'])) {
+            $data['message'] = $response['message'];
+            unset($response['message']);
+        }
+        if (isset($response['total'])) {
+            $data['total'] = $response['total'];
+            unset($response['total']);
+        }
+        if (isset($response['data'])) {
+            $data['data'] = $response['data'];
+            unset($response['data']);
+        }
+        if (count($response)) {
+            $data['extras']  = $response;
+        }
+
+        return $data;
     }
 }
