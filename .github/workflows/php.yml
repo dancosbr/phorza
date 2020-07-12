@@ -186,5 +186,5 @@ jobs:
         run: composer install --prefer-dist
 
       - name: Code Styling
-        run: phpstan analyse
+        run: phpcs
 
