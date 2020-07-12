@@ -6,7 +6,7 @@ namespace Phorza\Domain;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use RuntimeException;
+use Phorza\Domain\Error\JsonException;
 
 final class Utils
 {
@@ -35,7 +35,7 @@ final class Utils
         $string = json_encode($values);
 
         if (JSON_ERROR_NONE !== json_last_error() || false === $string) {
-            throw new RuntimeException('Unable to encode content into JSON: ' . json_last_error());
+            throw new JsonException('Unable to encode content into JSON: ' . json_last_error());
         }
 
         return $string;
@@ -46,7 +46,7 @@ final class Utils
         $data = json_decode($json, true);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new RuntimeException('Unable to parse response body into JSON: ' . json_last_error());
+            throw new JsonException('Unable to parse response body into JSON: ' . json_last_error());
         }
 
         return $data;

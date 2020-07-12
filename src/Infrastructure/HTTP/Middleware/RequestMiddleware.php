@@ -11,6 +11,7 @@ use Phorza\Infrastructure\Exception\InvalidRequestException;
 
 class RequestMiddleware implements MiddlewareInterface
 {
+    const EXPECTED_CONTENT_TYPE = 'application/json';
     /**
      * @param Event $event
      * @param Micro $app
@@ -31,14 +32,14 @@ class RequestMiddleware implements MiddlewareInterface
                 ->getRawBody()
         );
         if (JSON_ERROR_NONE !== json_last_error()) {
-            $app->response->setStatusCode(400, 'Bad Request')->setHeader('Content-Type', 'application/json')->sendHeaders();
+            $app->response->setStatusCode(400, 'Bad Request')->setHeader('Content-Type', self::EXPECTED_CONTENT_TYPE)->sendHeaders();
             $app->response->setJsonContent(['errors' => [['status' => 400, 'message' => 'Invalid content']]])->send();
 
             exit;
         }
 
-        if ($app->request->getContentType() !== 'application/json') {
-            $app->response->setStatusCode(400, 'Bad Request')->setHeader('Content-Type', 'application/json')->sendHeaders();
+        if ($app->request->getContentType() !== self::EXPECTED_CONTENT_TYPE) {
+            $app->response->setStatusCode(400, 'Bad Request')->setHeader('Content-Type', self::EXPECTED_CONTENT_TYPE)->sendHeaders();
             $app->response->setJsonContent(['errors' => [['status' => 400, 'message' => 'Invalid content-type']]])->send();
 
             exit;
