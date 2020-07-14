@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Phorza\Infrastructure\Bus\Query;
 
 use Phorza\Domain\Bus\Query\Query;
-use RuntimeException;
+use Phorza\Infrastructure\Exception\BaseException;
 
-final class QueryNotRegisteredError extends RuntimeException
+final class QueryNotRegisteredError extends BaseException
 {
     public int $errorCode = 500;
-    public string $errorMessage = 'Query bus error';
+    public string $errorMessage = 'Query not registered on query bus';
 
     public static function withQuery(Query $query): self
     {

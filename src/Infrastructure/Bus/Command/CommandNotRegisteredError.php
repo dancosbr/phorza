@@ -10,7 +10,7 @@ use Phorza\Infrastructure\Exception\BaseException;
 final class CommandNotRegisteredError extends BaseException
 {
     public int $errorCode = 500;
-    public string $errorMessage = 'Command bus error';
+    public string $errorMessage = 'Command not registered on command bus';
 
     public static function withCommand(Command $command): self
     {

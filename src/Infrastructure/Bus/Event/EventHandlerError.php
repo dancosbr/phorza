@@ -10,7 +10,7 @@ use Phorza\Infrastructure\Exception\BaseException;
 final class EventHandlerError extends BaseException
 {
     public int $errorCode = 500;
-    public string $errorMessage = 'Event bus error';
+    public string $errorMessage = 'Event handler error';
 
     public static function withEvent(DomainEvent $event, array $exceptions = []): self
     {
