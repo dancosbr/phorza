@@ -38,7 +38,7 @@ class RequestMiddleware implements MiddlewareInterface
             exit;
         }
 
-        if ($app->request->getContentType() !== self::EXPECTED_CONTENT_TYPE) {
+        if (strpos($app->request->getContentType(), self::EXPECTED_CONTENT_TYPE) === false) {
             $app->response->setStatusCode(400, 'Bad Request')->setHeader('Content-Type', self::EXPECTED_CONTENT_TYPE)->sendHeaders();
             $app->response->setJsonContent(['errors' => [['status' => 400, 'message' => 'Invalid content-type']]])->send();
 

@@ -54,6 +54,9 @@ class ErrorResponseMiddleware
             $httpStatusCode = $errorCode;
         }
 
+        $this->app->response->setHeader('Access-Control-Allow-Origin', '*');
+        $this->app->response->setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE');
+        $this->app->response->setHeader('Access-Control-Allow-Headers', 'content-type');
         $this->app->response->setStatusCode($httpStatusCode)->setHeader('Content-Type', 'application/json')->sendHeaders();
         $this->app->response->setContent(json_encode($data))->send();
 
